@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "6f2d93f4e09d0c5b",
+    "type": "split",
+    "children": [
+      {
+        "id": "da224a5a974395db",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f6d1854292241858",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Database.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d64b29c7e7189755",
+    "type": "split",
+    "children": [
+      {
+        "id": "76c68168a9ea17e7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8e0461fea4a0453b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6b8878d7ed202bb6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "02ceea6ecf80400b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "41fd9616cfd09bc2",
+    "type": "split",
+    "children": [
+      {
+        "id": "72a0a2ae9c58dcf1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0c286427b3fcfd14",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Database.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "bbd6139a28acd399",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Database.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b399dad2c669ef9d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "686316c68abd2c86",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Database.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "f6d1854292241858",
+  "lastOpenFiles": [
+    "Cards/Imboscata Serpentina.md",
+    "Database.md",
+    "scripts/insert_card.js",
+    "Cards/Teneb, il Mietitore.md",
+    "Cards/Costrizione.md",
+    "Cards/Strisciante di Spore.md",
+    "Cards/Tela della Strega.md",
+    "Cards/Calpestatore Topiario.md",
+    "Cards/Guida dell'Albereto.md",
+    "Cards/Pungolatrice Voldaren.md",
+    "Cards/Raiju Tonante.md",
+    "Cards/Arbaaz Mir.md",
+    "Cards/Moltitudine Abietta.md",
+    "Calpestatore Topiario.md",
+    "latest.json",
+    "test.json",
+    "response.html",
+    "insert_card.py",
+    "resources/white_mana_1.png",
+    "resources/white_mana.gif",
+    "resources/white_mana_2.png",
+    "resources/white_mana.png",
+    "Cards",
+    "resources",
+    "New note.md",
+    "scripts/interactive-tables.js",
+    "scripts"
+  ]
+}

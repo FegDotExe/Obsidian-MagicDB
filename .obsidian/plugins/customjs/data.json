@@ -1,0 +1,9 @@
+{
+  "jsFiles": "",
+  "jsFolder": "scripts",
+  "startupScriptNames": [],
+  "registeredInvocableScriptNames": [
+    "MagicDB"
+  ],
+  "rerunStartupScriptsOnFileChange": false
+}
