@@ -3,14 +3,12 @@ class MagicDB{
         const settings = {
             language: "Italian"
         };
-    
-        new Notice(`Test`);
 
         const url = "https://api.magicthegathering.io/v1/cards";
     
         const cardName = await this.get_input();
     
-        new Notice(`Carta: ${cardName}`);
+        new Notice(`Searching for card: ${cardName}`);
 
         const params = {
             name: cardName,
@@ -29,7 +27,7 @@ class MagicDB{
             // Do something with the data
             const jsonData = await response.json();
 
-            // new Notice(`JSON: ${Object.prototype.toString.call(jsonData.cards)}`);
+            new Notice("Got a response.");
 
             const fileContent = JSON.stringify(jsonData);
             await app.vault.adapter.write("latest.json", fileContent);
@@ -38,57 +36,48 @@ class MagicDB{
 
             if (jsonData.cards.length === 0) {
                 new Notice(`No results :(`);
-                process.exit(0);
+                return;
             }
 
-            let accepted="";
+            let accepted=false;
+            let number_of_cards=jsonData.cards.length;
+            let i=1;
 
             for (const card of jsonData.cards) {
                 if (settings.language !== "English" && !card.foreignNames) {
                     continue;
                 }
                 const localizedData = card.foreignNames.find(value => value.language === settings.language);
-
                 if (!localizedData) {
                     localizedData = card;
                 }
 
-                outputDict.name = localizedData.name;
-                outputDict.rarity = card.rarity;
-                outputDict.text = localizedData.text.replace(/"/g, "'").replace(/\n/g, " // ");
-                outputDict.types = card.types;
-                outputDict.image_url = localizedData.imageUrl;
-
-                console.log(outputDict.name);
-                console.log(outputDict.types);
-
-                if (card.types.includes("Land")) { // The card is a land
-                    // Do nothing
-                } else if (card.types.includes("Creature")) { // The card is a creature
-                    outputDict.mana_cost = card.manaCost;
-                    outputDict.power = card.power;
-                    outputDict.toughness = card.toughness;
-                    
-                    console.log(outputDict.mana_cost);
-                    console.log(`${outputDict.power}/${outputDict.toughness}`);
-                } else {
-                    outputDict.mana_cost = card.manaCost;
-                    
-                    console.log(outputDict.mana_cost);
+                for (const dict of [card, localizedData]) {
+                    for (const key in dict) {
+                        if (dict.hasOwnProperty(key) && key!="foreignNames" && dict[key] !== null) {
+                            if(key=="text" || key=="flavor" || key=="originalText"){
+                                outputDict[key]=dict[key].replace(/"/g, "'").replace(/\n/g, " // ");
+                            }else if(key=="imageUrl"){
+                                outputDict["image_url"]=dict["imageUrl"]
+                            }else if(key=="manaCost"){
+                                outputDict["mana_cost"]=dict["manaCost"]
+                            }else if(key!="legalities"){
+                                outputDict[key] = dict[key];
+                            }
+                        }
+                    }
                 }
 
-                console.log(outputDict.text);
-
-                console.log("-".repeat(15));
-                accepted = await this.get_input("Accept? [y/n]> ");
-                console.log("-".repeat(15));
-                if (accepted === "y") {
+                accepted = await this.get_bool_input("Accept? ("+i+"/"+number_of_cards+")",localizedData.imageUrl);
+                
+                if (accepted) {
                     break;
                 }
+                i++;
             }
 
-            if (accepted !== "y") {
-                process.exit(0);
+            if (!accepted) {
+                return
             }
 
             if (outputDict.mana_cost) {
@@ -110,14 +99,17 @@ class MagicDB{
             for (const key in outputDict) {
                 if (typeof outputDict[key] === "string") {
                     outputText += `${key}: "${outputDict[key]}"\n`;
-                } else {
+                }else if(Array.isArray(outputDict[key])){
+                    outputText += `${key}: ${JSON.stringify(outputDict[key])}\n`;
+                }
+                else {
                     outputText += `${key}: ${outputDict[key]}\n`;
                 }
             }
 
             outputText += "---";
 
-            new Notice("End reached!");
+            new Notice("Writing to file...");
 
             const filePath = `Cards/${outputDict.name}.md`;
             const file = app.vault.getAbstractFileByPath(filePath);
@@ -126,12 +118,14 @@ class MagicDB{
             } else {
                 await app.vault.create(filePath, outputText);
             }
+
+            new Notice("Success!");
         } catch (error) {
             console.error(error);
         }
     }
 
-    async get_input(message = "Input Card Name") {
+    async get_input(message = "Input Card Name",extra_text="") {
         const {Modal, Setting} = customJS.obsidian;
         return new Promise((resolve, reject) => {
             class MyModal extends Modal {
@@ -143,6 +137,13 @@ class MagicDB{
                 onOpen() {
                     const {contentEl} = this;
                     contentEl.createEl("h1", {text: message});
+
+                    if (extra_text) {
+                        const p = contentEl.createEl("p");
+                        p.innerText = extra_text;
+                    }
+                    
+
                     const inputSetting = new Setting(contentEl);
                     inputSetting.addText((text) => {
                         text.onChange((value) => {
@@ -158,10 +159,61 @@ class MagicDB{
                             this.close();
                         })
                     );
+                    contentEl.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            resolve(this.value);
+                            this.close();
+                        }
+                    });
                 }
             }
 
             new MyModal(app).open();
+        });
+    }
+
+    async get_bool_input(message = "Input Card Name",extra_text=""){
+        const {Modal, Setting} = customJS.obsidian;
+        return new Promise((resolve, reject) => {
+            class MyBoolInputModal extends Modal {
+                constructor(app) {
+                    super(app);
+                }
+
+                onOpen() {
+                    const {contentEl} = this;
+                    contentEl.createEl("h1", {text: message});
+
+                    if (extra_text) {
+                        const img = contentEl.createEl("img");
+                        img.src = extra_text;
+                        img.style.width = "250px";
+                        img.style.display = "block";
+                        img.style.margin = "auto";
+                    }
+
+                    const setting = new Setting(contentEl);
+                    setting.addButton((btn) => btn
+                        .setButtonText("Yes")
+                        .setCta()
+                        .onClick(() => {
+                            resolve(true);
+                            this.close();
+                        })
+                    );
+                    setting.addButton((btn) => btn
+                        .setButtonText("No")
+                        .setWarning()
+                        .onClick(() => {
+                            resolve(false);
+                            this.close();
+                        })
+                    );
+                }
+            }
+
+            new MyBoolInputModal(app).open();
         });
     }
 

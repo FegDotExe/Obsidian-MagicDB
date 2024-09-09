@@ -1,13 +1,26 @@
+Use `ctrl+m` or `cmnd+m` in order to add a card by name.
+
+---
+
 ```dataviewjs
 let pages=dv.pages('"Cards"');
 
+let subtype_filter = (card,subtype)=>{
+	if(card.subtypes){
+		return card.subtypes.includes(subtype);
+	}else{
+		return false;
+	}
+}
 
 // Filters here
-pages=pages.slice(0,10);
-//pages=pages.filter(card => card.power>=3)
-//pages=pages.filter(card => card.atk>0)
-// No more filters
+//pages=pages.filter(card => card.text.includes("segnalin"))
 
+//pages=pages.filter(card => card.toughness==1)
+//pages=pages.filter(card => card.atk>0)
+//pages=pages.slice(0,10);
+//pages=pages.filter(card => subtype_filter(card,"Dragon"))
+// No more filters
 
 // Usage functions
 let color_function = (b) =>{

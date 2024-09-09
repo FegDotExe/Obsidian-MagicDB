@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "da224a5a974395db",
+        "id": "50a83d528631c41b",
         "type": "tabs",
         "children": [
           {
-            "id": "f6d1854292241858",
+            "id": "ffeadc0242b3b385",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -146,21 +146,31 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f6d1854292241858",
+  "active": "ffeadc0242b3b385",
   "lastOpenFiles": [
-    "Cards/Imboscata Serpentina.md",
+    "Cards/Calpestatore Topiario.md",
+    "Cards/Guida dell'Albereto.md",
     "Database.md",
-    "scripts/insert_card.js",
+    "Cards/Caverna Accattivante.md",
+    "Cards",
     "Cards/Teneb, il Mietitore.md",
+    "Cards/Moltitudine Abietta.md",
+    "Cards/Pianura.md",
+    "Cards/Geist delle Catene Oniriche.md",
+    "Cards/Ondata Distruttiva.md",
+    "Cards/Sacca della Riparatrice.md",
+    "Cards/Vampira Accogliente.md",
+    "Cards/Agente di Rinforzo.md",
+    "Cards/Seduttrice della Nebelgast.md",
+    "Cards/Porta Enigma di Orazca.md",
+    "Cards/Imboscata Serpentina.md",
+    "scripts/insert_card.js",
     "Cards/Costrizione.md",
     "Cards/Strisciante di Spore.md",
     "Cards/Tela della Strega.md",
-    "Cards/Calpestatore Topiario.md",
-    "Cards/Guida dell'Albereto.md",
     "Cards/Pungolatrice Voldaren.md",
     "Cards/Raiju Tonante.md",
     "Cards/Arbaaz Mir.md",
-    "Cards/Moltitudine Abietta.md",
     "Calpestatore Topiario.md",
     "latest.json",
     "test.json",

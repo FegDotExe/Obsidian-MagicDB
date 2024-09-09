@@ -1,0 +1,10 @@
+{
+  "customjs:invoke-MagicDB": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "M"
+    }
+  ]
+}
